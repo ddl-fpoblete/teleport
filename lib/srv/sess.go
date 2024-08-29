@@ -282,7 +282,7 @@ func (s *SessionRegistry) TryCreateHostUser(identityContext IdentityContext) (cr
 	if err != nil {
 		if trace.IsAccessDenied(err) {
 			log.Warnf("Unable to create host users: %v", err)
-			return false, nil, nil
+			return false, nil, trace.Wrap(err)
 		}
 		log.Debug("Error while checking host users creation permission: ", err)
 		return false, nil, trace.Wrap(err)
