@@ -395,7 +395,13 @@ func (process *TeleportProcess) reRegister(conn *Connector, additionalPrincipals
 
 	if srv := process.getLocalAuth(); srv != nil {
 		clt = srv
-		remoteAddr = process.Config.AdvertiseIP
+		// auth server typically extracts remote addr from conn. since we're using the local auth
+		// directly we must supply a reasonable remote addr value. preferably the advertise IP, but
+		// otherwise localhost.
+		remoteAddr = defaults.Localhost
+		if process.Config.AdvertiseIP != "" {
+			remoteAddr = process.Config.AdvertiseIP
+		}
 	}
 
 	identity, err := auth.ReRegister(ctx, auth.ReRegisterParams{
