@@ -35,6 +35,11 @@ export type TableProps<T> = {
    */
   emptyHint?: string;
   pagination?: PaginationConfig<T>;
+  /**
+   * By default, no search is applied (empty search),
+   * unless "initialSearchValue" is defined.
+   */
+  initialSearchValue?: string;
   isSearchable?: boolean;
   searchableProps?: Extract<keyof T, string>[];
   // customSearchMatchers contains custom functions to run when search matching.

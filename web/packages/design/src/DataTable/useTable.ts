@@ -28,6 +28,7 @@ export default function useTable<T>({
   columns,
   pagination,
   showFirst,
+  initialSearchValue = '',
   searchableProps,
   customSearchMatchers = [],
   serversideProps,
@@ -51,7 +52,7 @@ export default function useTable<T>({
 
     return {
       data: serversideProps || disableFilter ? data : [],
-      searchValue: '',
+      searchValue: initialSearchValue,
       sort: col
         ? {
             key: (col.altSortKey || col.key) as string,

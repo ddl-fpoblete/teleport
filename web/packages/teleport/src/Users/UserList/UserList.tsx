@@ -21,6 +21,7 @@ import Table, { Cell, LabelCell } from 'design/DataTable';
 import { MenuButton, MenuItem } from 'shared/components/MenuAction';
 
 import { User, UserOrigin } from 'teleport/services/user';
+import { decodeUrlQueryParam } from 'teleport/components/hooks/useUrlFiltering';
 
 export default function UserList({
   users = [],
@@ -29,6 +30,8 @@ export default function UserList({
   onDelete,
   onReset,
 }: Props) {
+  const searchParams = new URLSearchParams(location.search);
+
   return (
     <Table
       data={users}
@@ -81,6 +84,7 @@ export default function UserList({
       ]}
       emptyText="No Users Found"
       isSearchable
+      initialSearchValue={decodeUrlQueryParam(searchParams.get('search') || '')}
       pagination={{ pageSize }}
     />
   );
