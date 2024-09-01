@@ -31,6 +31,10 @@ const WebAPIVersion = "v1"
 const ForeverTTL time.Duration = 0
 
 const (
+	// ComponentKey is a field that represents a component - e.g. service or
+	// function
+	ComponentKey = "trace.component"
+
 	// SSHAuthSock is the environment variable pointing to the
 	// Unix socket the SSH agent is running on.
 	SSHAuthSock = "SSH_AUTH_SOCK"
