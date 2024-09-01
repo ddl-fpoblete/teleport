@@ -1302,8 +1302,8 @@ func (f *Forwarder) getExecutor(ctx authContext, sess *clusterSession, req *http
 		authCtx:         ctx,
 		dial:            sess.DialWithContext,
 		tlsConfig:       sess.tlsConfig,
-		followRedirects: true,
 		pingPeriod:      f.cfg.ConnPingPeriod,
+		originalHeaders: req.Header,
 	})
 	rt := http.RoundTripper(upgradeRoundTripper)
 	if sess.creds != nil {
@@ -1322,8 +1322,8 @@ func (f *Forwarder) getDialer(ctx authContext, sess *clusterSession, req *http.R
 		authCtx:         ctx,
 		dial:            sess.DialWithContext,
 		tlsConfig:       sess.tlsConfig,
-		followRedirects: true,
 		pingPeriod:      f.cfg.ConnPingPeriod,
+		originalHeaders: req.Header,
 	})
 	rt := http.RoundTripper(upgradeRoundTripper)
 	if sess.creds != nil {
